@@ -15,9 +15,18 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular/build:application",
+          "builder": "@angular-builders/custom-webpack:browser",
           "options": {
-            "browser": "src/main.ts",
+            "customWebpackConfig": {
+              "path": "webpack.electron.config.js"
+            },
+            "outputPath": "dist",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "allowedCommonJsDependencies": [
+              "rxjs",
+              "rxjs/operators"
+            ],
             "polyfills": [
               "zone.js"
             ],
@@ -58,7 +67,7 @@
           "defaultConfiguration": "production"
         },
         "serve": {
-          "builder": "@angular/build:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
               "buildTarget": "localai-desktop:build:production"
